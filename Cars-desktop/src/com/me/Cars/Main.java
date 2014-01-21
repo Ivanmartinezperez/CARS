@@ -11,7 +11,6 @@ public class Main {
 		cfg.useGL20 = false;
 		cfg.width = 480;
 		cfg.height = 320;
-		String hola = "HELLO";
 		
 		new LwjglApplication(new Game(), cfg);
 	}
