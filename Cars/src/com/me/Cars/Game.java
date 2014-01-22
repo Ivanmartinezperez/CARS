@@ -15,6 +15,7 @@ public class Game implements ApplicationListener {
 	private SpriteBatch batch;
 	private Texture texture;
 	private Sprite sprite;
+	private float rot;
 	
 	@Override
 	public void create() {		
@@ -48,8 +49,12 @@ public class Game implements ApplicationListener {
 		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
+		final float gradosporsegundo = 100.0f;
+		rot = (rot + Gdx.graphics.getDeltaTime() * gradosporsegundo) % 360;
+		sprite.setRotation(rot);
 		sprite.draw(batch);
 		batch.end();
+		
 	}
 
 	@Override
