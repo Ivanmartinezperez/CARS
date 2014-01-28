@@ -1,0 +1,60 @@
+NinjaMove.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Nin
+  rotate: false
+  xy: 2, 2
+  size: 133, 104
+  orig: 145, 110
+  offset: 5, 0
+  index: 1
+Nin
+  rotate: false
+  xy: 2, 108
+  size: 136, 97
+  orig: 156, 105
+  offset: 6, 5
+  index: 2
+Nin
+  rotate: false
+  xy: 140, 108
+  size: 72, 80
+  orig: 88, 98
+  offset: 2, 7
+  index: 3
+Nin
+  rotate: false
+  xy: 2, 207
+  size: 103, 83
+  orig: 111, 99
+  offset: 8, 4
+  index: 4
+Nin
+  rotate: false
+  xy: 107, 207
+  size: 134, 103
+  orig: 136, 109
+  offset: 0, 3
+  index: 5
+Nin
+  rotate: false
+  xy: 2, 312
+  size: 148, 95
+  orig: 154, 115
+  offset: 3, 10
+  index: 6
+Nin
+  rotate: false
+  xy: 152, 312
+  size: 87, 80
+  orig: 109, 104
+  offset: 10, 3
+  index: 8
+Nin
+  rotate: false
+  xy: 2, 409
+  size: 110, 89
+  orig: 122, 105
+  offset: 6, 7
+  index: 9
