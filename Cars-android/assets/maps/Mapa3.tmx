@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="16" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="GameTextures" tilewidth="32" tileheight="32">
+  <image source="GameTextures.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="1025" name="GameTextures2" tilewidth="32" tileheight="32">
+  <image source="GameTextures2.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="Nivel" width="32" height="16">
+  <data encoding="base64" compression="zlib">
+   eJy91EdYyGEcwPEys4XCkVD2JkcysjPLsewoyT6i7F2UI5EtEekYZSQj29Hee998XD0P/5vD53ne53l/z/N9L+8vNCQkpBa1qUNd6lGfMBrQkEY0pglNaUZzwmlBS1oRQSStaUNbQv/RaEd7ouhARzoRTQyd6UJXutGdHvSkF73pQ1/60Z8BDCSWQQGNwQwhjqEMYzgjiGckoxjNGMYyjvEkMIGJTGIyU5hKIklMC2gkk8J0ZjCTWcxmDnNJZR7zSSOdBWSwkEwWsZglLGUZy1kR0FjJKlaTRTZrWMs61rOBjWxiM1vYyja2s4McctnJLvLIZ3dAYw97KWAf+ynkAAc5xGGOcJRjHKeIExRzklOUcJozlHKWsoBGOec4TwWVXOAil7hMFVeo5irXuM4NarjJLW5zh7vc4z4PAhoPecRjnvCUZzznBS95xWve8JZ3vOcDH/nEZ77wlW985wc/AxqhPmctalOHutSjPmE0oCGNaEwTmtKM5oTTgpa0IoJIWtOGtqH/brSjPVF0oCOdiCaGzr/nLIwwKv7Qy11v+tCXfvRnAAOJZVBAYzBDiGMowxjOCOIZ+XtOK4YxzmMZx3gSmMBEJjGZKUwlkSSmBTSSSWE6M5jJLGYzh7mkMo/5pJHOAjJYSCaLWMwSlrKM5awIaKxkFavJIps1rGUd69nARjaxmS1sZRvb2UEOuexkF3nkszugsYe9FLCP/RRygIMc4jBHOMoxjlPECYo5ySlKOM0ZSjlLWUCjnHOcp4JKLnCRS1ymiitUc5VrXOcGNdzkFre5w13ucZ8HAY2C/6T8L+/4BRhI8Lw=
+  </data>
+ </layer>
+ <objectgroup name="Objetos" width="32" height="16">
+  <object name="Caja" type="object" x="290" y="290">
+   <polyline points="0,0 190,-1 191,30 62,30 62,60 -1,60 0,2"/>
+  </object>
+  <object name="Entorno" type="object" x="2" y="2" width="1022" height="387"/>
+ </objectgroup>
+</map>
