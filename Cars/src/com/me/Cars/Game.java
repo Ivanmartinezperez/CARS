@@ -55,7 +55,9 @@ public class Game implements ApplicationListener {
 		Escenario = new Stage();
 		Escenario.setCamera(camera);
 		p = new Player();
+		Escenario.getSpriteBatch().begin();
 		p.crear(world, Escenario);
+		Escenario.getSpriteBatch().end();
 		Escenario.addActor(p);
 		
 		world.getBodies(cuerpos);
@@ -64,11 +66,14 @@ public class Game implements ApplicationListener {
 		
 		Box2DMapObjectParser parser = new Box2DMapObjectParser(0.015625f);
 		
+		
 		TiledMap map = new TmxMapLoader().load("maps/Mapa3.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map,parser.getUnitScale());
 
 		
 		parser.load(world, map);
+		
+		System.out.println(parser.getBodies().size);
 		
 		
 	
@@ -82,16 +87,26 @@ public class Game implements ApplicationListener {
 	public void render() {		
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-		if(cuerpos.get(0).getLinearVelocity().y==0){
-			p.Jump(false);
-		}
-		else p.Jump(true);
-		
+		//Player
+		CheckJump();
 		handleInput();
 		
+		//Camara
 		camera.position.set(cuerpos.get(0).getPosition().x,cuerpos.get(0).getPosition().y,0);
 		camera.update();
 		
+		//renderiza las texturas
+		mapRenderer.setView(camera);
+		if(Render)mapRenderer.render();
+				
+		//Renderiza los objetos
+		debug.render(world, camera.combined);
+		
+		//Escenario
+		Escenario.getSpriteBatch().begin();
+		p.pintate(Escenario.getSpriteBatch(),world);
+		Escenario.getSpriteBatch().enableBlending();
+		Escenario.getSpriteBatch().end();
 		Escenario.act();
 		Escenario.draw();
 		
@@ -99,9 +114,8 @@ public class Game implements ApplicationListener {
 		
 		world.step(1/60f, 8, 3);
 		
-		mapRenderer.setView(camera);
-		if(Render)mapRenderer.render();
-		debug.render(world, camera.combined);
+		
+		System.out.println(cuerpos.get(0).getLinearVelocity().x +" " + cuerpos.get(0).getLinearVelocity().y);
 	
 				
 	}
@@ -133,7 +147,7 @@ public class Game implements ApplicationListener {
         		for (int i = 0; i < cuerpos.size; i++) {
         			cuerpos.get(i).applyLinearImpulse(0, 70, cuerpos.get(0).getPosition().x, cuerpos.get(0).getPosition().y, true);
         		}
-        		
+        		System.out.println(cuerpos.size);
         	}
         }
         if(Gdx.input.isKeyPressed(Input.Keys.W)) {
@@ -158,6 +172,13 @@ public class Game implements ApplicationListener {
 
 	@Override
 	public void resume() {
+	}
+	
+	private void CheckJump(){
+		if(cuerpos.get(0).getLinearVelocity().y == 0){
+			p.Jump(false);
+		}
+		else p.Jump(true);
 	}
 }
 

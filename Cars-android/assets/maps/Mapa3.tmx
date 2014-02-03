@@ -12,11 +12,11 @@
   </data>
  </layer>
  <objectgroup name="Objetos" width="32" height="16">
-  <object name="Caja" type="object" x="290" y="290">
-   <polyline points="0,0 190,-1 191,30 62,30 62,60 -1,60 0,2"/>
-  </object>
   <object name="Entorno" type="object" x="1" y="2">
    <polyline points="0,0 1,390 1022,390 1023,-1"/>
+  </object>
+  <object name="Caja" type="object" x="289" y="288">
+   <polyline points="0,0 191,0 191,32 64,32 64,63 0,63 0,0"/>
   </object>
  </objectgroup>
 </map>

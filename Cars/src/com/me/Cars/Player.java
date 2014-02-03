@@ -2,10 +2,12 @@ package com.me.Cars;
 
 import net.dermetfan.utils.libgdx.graphics.AnimatedBox2DSprite;
 import net.dermetfan.utils.libgdx.graphics.AnimatedSprite;
+import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -32,13 +34,18 @@ public class Player extends Actor {
 	Array<Animation> myanimations;
 	AnimatedBox2DSprite bicho;
 	private boolean jumping;
+	float StateTime;
+	TextureAtlas atlas;
+	private float MaxSpeed;
 	
 	public Player() {
 		// TODO Auto-generated constructor stub
 		Texture tex = new Texture(Gdx.files.internal("data/Ninja.png"));
-		TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("data/Ninja.atlas"));
+		atlas = new TextureAtlas(Gdx.files.internal("data/Ninja.atlas"));
 		
+		MaxSpeed = 10;
 		jumping=false;
+		StateTime = 0;
 	
 		//atlas.addRegion("Ninja", tex, 316, 8, 142, 104);
 		
@@ -47,11 +54,13 @@ public class Player extends Actor {
 		myanimations = new Array<Animation>();
 		myanimations.add(new Animation(1/3f,ninjarun));
 		myanimations.get(0).setPlayMode(Animation.LOOP);
-		AnimatedSprite ap = new AnimatedSprite(myanimations.get(0));
-		bicho = new AnimatedBox2DSprite(ap);
+		AnimatedSprite tmp  = new AnimatedSprite(myanimations.get(0));
+		bicho = new AnimatedBox2DSprite(tmp);
 		
 		
 	}
+	
+	
 	
 	public void crear(World world, Stage stage){
 		//Body Definition
@@ -88,12 +97,13 @@ public class Player extends Actor {
 		//square fixture
 		FixtureDef squarefix = new FixtureDef();
 		squarefix.density = 5f;
-		squarefix.friction = 0.2f;
+		squarefix.friction = 1f;
 		squarefix.restitution = 0;
 		squarefix.shape = square;
 		
 		body = world.createBody(cajaboddef);
-		body.createFixture(squarefix);
+		bicho.setTime(2.0f);
+		body.createFixture(squarefix).setUserData(bicho);
 		body.setFixedRotation(true);
 		
 		
@@ -106,6 +116,11 @@ public class Player extends Actor {
 		
 		
 		
+		
+	}
+	
+	public void pintate(Batch batch,World world){
+		AnimatedBox2DSprite.draw(batch, world);
 	}
 	
 	public boolean isJumping(){
