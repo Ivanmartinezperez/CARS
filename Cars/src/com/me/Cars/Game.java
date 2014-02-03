@@ -18,6 +18,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -31,6 +32,8 @@ public class Game implements ApplicationListener {
 	private float rotationSpeed;
 	boolean Render;
 	Stage Escenario;
+	Array<Body> cuerpos;
+	Player p;
 	
 	@Override
 	public void create() {		
@@ -42,6 +45,7 @@ public class Game implements ApplicationListener {
 		
 		rotationSpeed=0.5f;
 		
+		cuerpos = new Array<Body>();
 		world = new World( new Vector2(0,-9.81f),true);
 		debug = new Box2DDebugRenderer();
 		camera = new OrthographicCamera();
@@ -50,9 +54,12 @@ public class Game implements ApplicationListener {
 		// Inicializamos escenario
 		Escenario = new Stage();
 		Escenario.setCamera(camera);
-		Player p = new Player();
+		p = new Player();
 		p.crear(world, Escenario);
 		Escenario.addActor(p);
+		
+		world.getBodies(cuerpos);
+		
 		
 		
 		Box2DMapObjectParser parser = new Box2DMapObjectParser(0.015625f);
@@ -74,8 +81,15 @@ public class Game implements ApplicationListener {
 	@Override
 	public void render() {		
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		
+		if(cuerpos.get(0).getLinearVelocity().y==0){
+			p.Jump(false);
+		}
+		else p.Jump(true);
+		
 		handleInput();
 		
+		camera.position.set(cuerpos.get(0).getPosition().x,cuerpos.get(0).getPosition().y,0);
 		camera.update();
 		
 		Escenario.act();
@@ -100,20 +114,27 @@ public class Game implements ApplicationListener {
                 camera.zoom -= 0.02;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                if (camera.position.x > 0)
-                        camera.translate(-1, 0, 0);
+                for (int i = 0; i < cuerpos.size; i++) {
+					cuerpos.get(i).applyForceToCenter(-100, 0, true);
+				}
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                if (camera.position.x < 1024)
-                        camera.translate(1, 0, 0);
+        	for (int i = 0; i < cuerpos.size; i++) {
+				cuerpos.get(i).applyForceToCenter(100, 0, true);
+			}
         }
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                if (camera.position.y > 0)
-                        camera.translate(0, -1, 0);
+        	for (int i = 0; i < cuerpos.size; i++) {
+				cuerpos.get(i).applyForceToCenter(0, 0, true);
+			}
         }
         if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                if (camera.position.y < 1024)
-                        camera.translate(0, 1, 0);
+        	if(!p.isJumping()){
+        		for (int i = 0; i < cuerpos.size; i++) {
+        			cuerpos.get(i).applyLinearImpulse(0, 70, cuerpos.get(0).getPosition().x, cuerpos.get(0).getPosition().y, true);
+        		}
+        		
+        	}
         }
         if(Gdx.input.isKeyPressed(Input.Keys.W)) {
                 camera.rotate(-rotationSpeed, 0, 0, 1);
