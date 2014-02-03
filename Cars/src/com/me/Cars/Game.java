@@ -20,6 +20,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 
 public class Game implements ApplicationListener {
@@ -29,6 +30,7 @@ public class Game implements ApplicationListener {
 	private OrthographicCamera camera;
 	private float rotationSpeed;
 	boolean Render;
+	Stage Escenario;
 	
 	@Override
 	public void create() {		
@@ -37,13 +39,21 @@ public class Game implements ApplicationListener {
 		float h = Gdx.graphics.getHeight();
 		
 		Render=true;
-
+		
 		rotationSpeed=0.5f;
 		
 		world = new World( new Vector2(0,-9.81f),true);
 		debug = new Box2DDebugRenderer();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1024/80, 512/80);
+		
+		// Inicializamos escenario
+		Escenario = new Stage();
+		Escenario.setCamera(camera);
+		Player p = new Player();
+		p.crear(world, Escenario);
+		Escenario.addActor(p);
+		
 		
 		Box2DMapObjectParser parser = new Box2DMapObjectParser(0.015625f);
 		
@@ -67,6 +77,11 @@ public class Game implements ApplicationListener {
 		handleInput();
 		
 		camera.update();
+		
+		Escenario.act();
+		Escenario.draw();
+		
+		
 		
 		world.step(1/60f, 8, 3);
 		

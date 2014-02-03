@@ -1,0 +1,61 @@
+
+Ninja.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Ninja
+  rotate: false
+  xy: 1, 1
+  size: 161, 111
+  orig: 161, 111
+  offset: 0, 0
+  index: 2
+Ninja
+  rotate: false
+  xy: 164, 12
+  size: 150, 100
+  orig: 150, 100
+  offset: 0, 0
+  index: 6
+Ninja
+  rotate: false
+  xy: 316, 8
+  size: 142, 104
+  orig: 142, 104
+  offset: 0, 0
+  index: 1
+Ninja
+  rotate: false
+  xy: 460, 15
+  size: 133, 97
+  orig: 133, 97
+  offset: 0, 0
+  index: 5
+Ninja
+  rotate: false
+  xy: 595, 26
+  size: 119, 86
+  orig: 119, 86
+  offset: 0, 0
+  index: 8
+Ninja
+  rotate: false
+  xy: 716, 9
+  size: 103, 103
+  orig: 103, 103
+  offset: 0, 0
+  index: 7
+Ninja
+  rotate: false
+  xy: 821, 12
+  size: 97, 100
+  orig: 97, 100
+  offset: 0, 0
+  index: 3
+Ninja
+  rotate: false
+  xy: 920, 15
+  size: 97, 97
+  orig: 97, 97
+  offset: 0, 0
+  index: 4
